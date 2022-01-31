@@ -15,21 +15,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.redAccent,
-        title: Text("Sign Up"),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.redAccent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
-          child: Expanded(
-            child: Container(
+      backgroundColor: Colors.redAccent,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
               width: double.infinity,
-              height: double.infinity,
+              height: 800,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(
@@ -176,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

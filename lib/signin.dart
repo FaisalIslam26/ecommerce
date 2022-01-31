@@ -14,21 +14,30 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.redAccent,
-        title: Text("Sign In"),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.redAccent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
-          child: Expanded(
-            child: Container(
+      backgroundColor: Colors.redAccent,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                "Sign In",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
               width: double.infinity,
-              height: double.infinity,
+              height: 800,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(
@@ -173,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
