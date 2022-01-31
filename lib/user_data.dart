@@ -111,7 +111,7 @@ class UserdataScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 100),
+                    padding: const EdgeInsets.symmetric(vertical: 80),
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
