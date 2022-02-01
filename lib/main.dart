@@ -1,6 +1,7 @@
 import 'package:ecommerce/signin.dart';
 import 'package:ecommerce/signup.dart';
 import 'package:ecommerce/user_data.dart';
+import 'package:ecommerce/view_item.screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,12 +17,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "ecommerce app",
-      initialRoute: SignInScreen.path,
-      routes: {
-        SignInScreen.path: (ctx) => SignInScreen(),
-        SignUpScreen.path: (ctx) => SignUpScreen(),
-        UserdataScreen.path: (ctx) => UserdataScreen(),
-      },
+      // initialRoute: SignInScreen.path,
+      // routes: {
+      //   SignInScreen.path: (ctx) => SignInScreen(),
+      //   SignUpScreen.path: (ctx) => SignUpScreen(),
+      //   UserdataScreen.path: (ctx) => UserdataScreen(),
+      // },
+
+      home: ItemScreen(),
     );
   }
 }
