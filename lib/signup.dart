@@ -1,6 +1,8 @@
 import 'package:ecommerce/signin.dart';
 import 'package:ecommerce/user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String path = "SignUpScreen";
@@ -11,7 +13,36 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   bool istap = false;
+
+  signUp() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      var authCredential = userCredential.user;
+      print(authCredential!.uid);
+
+      if (authCredential.uid.isNotEmpty) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => UserdataScreen()));
+      } else {
+        Fluttertoast.showToast(msg: "Something is Wrong");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(msg: 'The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: 'The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _emailController,
                             decoration: InputDecoration(
                               prefixIcon: Padding(
                                 padding: const EdgeInsets.only(right: 10),
@@ -99,6 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           TextFormField(
+                            controller: _passwordController,
                             obscureText: !istap,
                             decoration: InputDecoration(
                               prefixIcon: Padding(
@@ -139,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, UserdataScreen.path);
+                        signUp();
                       },
                       child: Text(
                         "Continue",
@@ -167,17 +200,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 14,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, SignInScreen.path);
-                          },
+                        GestureDetector(
                           child: Text(
-                            "Sign In",
+                            "SignIn",
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.redAccent,
                             ),
                           ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SignInScreen()));
+                          },
                         ),
                       ],
                     ),
