@@ -22,15 +22,20 @@ class _ItemScreenState extends State<ItemScreen> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: CircleAvatar(
-          backgroundColor: Colors.redAccent,
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_back),
+        backgroundColor: Colors.transparent,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Colors.redAccent,
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_back,
+              ),
+            ),
           ),
         ),
-        // elevation: 0,
+        elevation: 0,
         actions: [
           CircleAvatar(
             backgroundColor: Colors.redAccent,
