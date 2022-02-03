@@ -1,5 +1,6 @@
 import 'package:ecommerce/home.dart';
 import 'package:ecommerce/signup.dart';
+import 'package:ecommerce/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
       if (authCredential.uid.isNotEmpty) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => HomeScreen()));
+            context, MaterialPageRoute(builder: (_) => UserdataScreen()));
       } else {
         Fluttertoast.showToast(msg: "Something is Wrong");
       }
