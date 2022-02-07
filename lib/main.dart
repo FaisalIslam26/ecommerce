@@ -1,9 +1,9 @@
-import 'package:ecommerce/added_to_cart.dart';
+import 'package:ecommerce/bottom_nav_pages/added_to_cart.dart';
 import 'package:ecommerce/signin.dart';
 import 'package:ecommerce/signup.dart';
 import 'package:ecommerce/splash_screen.dart';
 import 'package:ecommerce/user_data.dart';
-import 'package:ecommerce/view_item.screen.dart';
+import 'package:ecommerce/product_details.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';

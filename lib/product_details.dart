@@ -2,20 +2,22 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ItemScreen extends StatefulWidget {
-  const ItemScreen({Key? key}) : super(key: key);
+class ProductDetails extends StatefulWidget {
+  var _products;
+
+  ProductDetails(this._products);
 
   @override
-  State<ItemScreen> createState() => _ItemScreenState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
-class _ItemScreenState extends State<ItemScreen> {
+class _ProductDetailsState extends State<ProductDetails> {
   int activeIndex = 0;
-  final slideImage = [
-    "assets/images/w1.jpg",
-    "assets/images/w2.jpg",
-    "assets/images/w3.png",
-  ];
+  // final slideImage = [
+  //   "assets/images/w1.jpg",
+  //   "assets/images/w2.jpg",
+  //   "assets/images/w3.png",
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,12 @@ class _ItemScreenState extends State<ItemScreen> {
           ),
         ],
       ),
+
+      // body: SafeArea(
+      //     child: Column(
+      //   children: [Text(widget._products['product-name'])],
+      // )),
+
       body: Column(
         children: [
           SizedBox(
@@ -67,9 +75,9 @@ class _ItemScreenState extends State<ItemScreen> {
                   onPageChanged: (index, reason) =>
                       setState(() => activeIndex = index),
                 ),
-                itemCount: slideImage.length,
+                itemCount: widget._products.length,
                 itemBuilder: (context, index, realIndex) {
-                  final img = slideImage[index];
+                  final img = widget._products['product-Image'];
                   return buildImage(img, index);
                 },
               ),
@@ -80,19 +88,16 @@ class _ItemScreenState extends State<ItemScreen> {
             height: 30,
           ),
           Text(
-            "Leather Shoes",
+            widget._products['product-name'],
             style: TextStyle(
               color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text("\$149.99"),
+          Text(widget._products["product-price"]),
           Text(
-            """ 
-          Shoes can a have a leather lining inside. It is not the leather where
-          the foot rests but the part which is in contact with upper part of the foot
-          """,
+            widget._products["product-description"],
             textAlign: TextAlign.justify,
             style: TextStyle(),
           ),
@@ -125,7 +130,7 @@ class _ItemScreenState extends State<ItemScreen> {
   Widget buildImage(String img, int index) => Container(
         margin: EdgeInsets.symmetric(horizontal: 24),
         color: Colors.grey,
-        child: Image.asset(
+        child: Image.network(
           img,
           fit: BoxFit.cover,
         ),
@@ -137,6 +142,6 @@ class _ItemScreenState extends State<ItemScreen> {
             activeDotColor: Colors.redAccent,
             dotColor: Colors.grey),
         activeIndex: activeIndex,
-        count: slideImage.length,
+        count: widget._products.length,
       );
 }

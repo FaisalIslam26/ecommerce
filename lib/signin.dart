@@ -1,4 +1,5 @@
-import 'package:ecommerce/home.dart';
+import 'package:ecommerce/bottom_nav_pages/home.dart';
+import 'package:ecommerce/bottomnav.dart';
 import 'package:ecommerce/signup.dart';
 import 'package:ecommerce/user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +28,8 @@ class _SignInScreenState extends State<SignInScreen> {
       print(authCredential!.uid);
 
       if (authCredential.uid.isNotEmpty) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => UserdataScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => BottomNavigationScreen()));
       } else {
         Fluttertoast.showToast(msg: "Something is Wrong");
       }

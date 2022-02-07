@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce/home.dart';
+import 'package:ecommerce/bottom_nav_pages/home.dart';
+import 'package:ecommerce/bottomnav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -44,8 +45,8 @@ class _UserdataScreenState extends State<UserdataScreen> {
       "gender": _genderController.text,
       "age": _ageController.text,
     })
-      ..then((value) => Navigator.push(
-              context, MaterialPageRoute(builder: (_) => HomeScreen())))
+      ..then((value) => Navigator.push(context,
+              MaterialPageRoute(builder: (_) => BottomNavigationScreen())))
           .catchError((error) => print("something is wrong. $error"));
   }
 
