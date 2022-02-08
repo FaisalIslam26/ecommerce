@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce/bottom_nav_pages/added_to_cart.dart';
+import 'package:ecommerce/bottom_nav_pages/cart.dart';
 import 'package:ecommerce/bottom_nav_pages/search.dart';
 import 'package:ecommerce/product_details.dart';
 

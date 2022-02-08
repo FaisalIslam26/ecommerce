@@ -34,7 +34,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             "Update",
             style: TextStyle(color: Colors.white),
           ),
-        )
+          style: ElevatedButton.styleFrom(
+            primary: Colors.redAccent, // background
+          ),
+        ),
       ],
     );
   }
@@ -52,7 +55,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.redAccent,
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+        title: Text(
+          "User-Profile",
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance

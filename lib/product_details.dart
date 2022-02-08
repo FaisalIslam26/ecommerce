@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -19,35 +21,91 @@ class _ProductDetailsState extends State<ProductDetails> {
   //   "assets/images/w3.png",
   // ];
 
+  Future addTocart() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users-cart-item");
+    return _collectionRef
+        .doc(currentUser!.email)
+        .collection("items")
+        .doc()
+        .set({
+      "name": widget._products["product-name"],
+      "price": widget._products["product-price"],
+      "images": widget._products["product-Image"],
+    }).then((Value) => print("Added to cart"));
+  }
+
+  Future addToFavourite() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users-favourite-item");
+    return _collectionRef
+        .doc(currentUser!.email)
+        .collection("items")
+        .doc()
+        .set({
+      "name": widget._products["product-name"],
+      "price": widget._products["product-price"],
+      "images": widget._products["product-Image"],
+    }).then((Value) => print("Added to favourite"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.redAccent,
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_back,
+          backgroundColor: Colors.transparent,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.redAccent,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
               ),
             ),
           ),
-        ),
-        elevation: 0,
-        actions: [
-          CircleAvatar(
-            backgroundColor: Colors.redAccent,
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.favorite_outline),
-            ),
-          ),
-        ],
-      ),
+          elevation: 0,
+          actions: [
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("users-favourite-item")
+                    .doc(FirebaseAuth.instance.currentUser!.email)
+                    .collection("items")
+                    .where("name", isEqualTo: widget._products['product-name'])
+                    .snapshots(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return Text("");
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.redAccent,
+                      child: IconButton(
+                        onPressed: () => snapshot.data.docs.length == 0
+                            ? addToFavourite()
+                            : print("Already Added"),
+                        icon: snapshot.data.docs.length == 0
+                            ? Icon(
+                                Icons.favorite_outline,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                              ),
+                      ),
+                    ),
+                  );
+                }),
+          ]),
 
       // body: SafeArea(
       //     child: Column(
@@ -104,7 +162,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => addTocart(),
               child: Text(
                 "ADD To Cart",
                 style: TextStyle(

@@ -1,4 +1,4 @@
-import 'package:ecommerce/bottom_nav_pages/added_to_cart.dart';
+import 'package:ecommerce/bottom_nav_pages/cart.dart';
 import 'package:ecommerce/signin.dart';
 import 'package:ecommerce/signup.dart';
 import 'package:ecommerce/splash_screen.dart';

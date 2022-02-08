@@ -1,4 +1,4 @@
-import 'package:ecommerce/bottom_nav_pages/added_to_cart.dart';
+import 'package:ecommerce/bottom_nav_pages/cart.dart';
 import 'package:ecommerce/bottom_nav_pages/favourite.dart';
 import 'package:ecommerce/bottom_nav_pages/home.dart';
 import 'package:ecommerce/bottom_nav_pages/profile.dart';
@@ -24,11 +24,16 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
     return Scaffold(
       body: screens.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        // type: BottomNavigationBarType.shifting, // Shifting
+        // selectedItemColor: Colors.grey,
+        // unselectedItemColor: Colors.blue,
+        backgroundColor: Colors.redAccent,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
-              backgroundColor: Colors.blue),
+            icon: Icon(Icons.home),
+            label: "Home",
+            backgroundColor: Colors.red,
+          ),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite_outline),
               label: "Favourite",
