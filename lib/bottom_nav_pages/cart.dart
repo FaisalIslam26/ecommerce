@@ -1,10 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-class FavouriteScreen extends StatelessWidget {
-  const FavouriteScreen({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+  const CartScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +18,7 @@ class FavouriteScreen extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         centerTitle: true,
         title: Text(
-          "Favourite",
+          "Added to cart",
           style: TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
@@ -20,7 +26,7 @@ class FavouriteScreen extends StatelessWidget {
       body: SafeArea(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("users-favourite-item")
+                .collection("users-cart-item")
                 .doc(FirebaseAuth.instance.currentUser!.email)
                 .collection("items")
                 .snapshots(),
@@ -50,7 +56,7 @@ class FavouriteScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           FirebaseFirestore.instance
-                              .collection("users-favourite-item")
+                              .collection("users-cart-item")
                               .doc(FirebaseAuth.instance.currentUser!.email)
                               .collection("items")
                               .doc(_documentSnapshot.id)
